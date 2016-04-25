@@ -1,0 +1,48 @@
+import json
+
+datum = {}
+all_info = {}
+my_file = open("output.txt", "w")
+errors = open("logs.txt", "w")
+
+def close_file():
+    my_file.close()
+
+def read_file():
+    my_file = open("output.txt", "r")
+    dict_of_files = my_file.read()
+    obj = json.loads(dict_of_files)
+    my_file.close()
+
+def data(datum):
+    print "BIODATA"
+    print "Please enter the required information:"
+    ppl = 1
+    sel = 'y'
+    while sel == 'y':
+        print "\nPerson", ppl
+        s1 = raw_input("First name: \t")
+        datum["Name"] = s1
+        s2 = raw_input("Age: \t\t")
+        datum["Age"] = s2
+        s3 = raw_input("Birthday[YYYY/MM/DD]: ")
+        datum["Birthday"] = s3
+        s4 = raw_input("Address: \t")
+        datum["Address"] = s4
+        sel = raw_input("Continue? [y] or [n]: ") 
+        all_info[ppl] = datum
+        print datum
+        print all_info
+        ppl += 1
+    return all_info
+
+def write_file(my_file):
+    datum ={}
+    all_in = data(datum)
+    line = my_file.write(str(all_in))
+    my_file.close()
+
+write_file(my_file)
+read_file()
+close_file(my_file)
+    
